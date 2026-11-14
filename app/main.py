@@ -1,4 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Request
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -34,6 +38,12 @@ async def lifespan(app: FastAPI):
         task.cancel()
 
 app = FastAPI(lifespan=lifespan)
+def get_user_token(request: Request):
+    return request.headers.get("Authorization", get_remote_address(request))
+limiter = Limiter(key_func=get_user_token)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
@@ -89,7 +99,8 @@ async def fetch_history(session_id: str, current_user: str = Depends(get_current
 
 # Protected Route: Requires Valid JWT
 @app.post("/ask")
-async def ask_assistant(query: UserQuery, current_user: str = Depends(get_current_user)):
+@limiter.limit("5/minute")
+async def ask_assistant(request: Request, query: UserQuery, current_user: str = Depends(get_current_user)):
     context = state_manager.get_context(query.session_id)
     if not context["current_state"]:
         return {"answer": f"No live data found for session: {query.session_id}"}

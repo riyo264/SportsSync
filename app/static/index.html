@@ -368,6 +368,11 @@
                 
                 document.getElementById('typing-indicator')?.remove();
                 
+                if (response.status === 429) {
+                    appendMessage("Too many requests. Please wait a minute to let the AI cool down.", false);
+                    return;
+                }
+
                 if (response.status === 401) {
                     localStorage.removeItem('sportsSyncToken');
                     jwtToken = null;

@@ -7,3 +7,4 @@ pydantic
 boto3
 PyJWT
 bcrypt
+slowapi
