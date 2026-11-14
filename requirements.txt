@@ -4,3 +4,6 @@ google-genai
 websockets
 httpx
 pydantic
+boto3
+PyJWT
+bcrypt

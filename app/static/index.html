@@ -36,10 +36,17 @@
                 </div>
             </div>
             
-            <button id="theme-toggle" class="p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-black text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
-                <svg id="icon-sun" class="w-5 h-5 md:w-6 md:h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                <svg id="icon-moon" class="w-5 h-5 md:w-6 md:h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-            </button>
+            <div class="flex items-center gap-2 md:gap-3">
+                <button id="theme-toggle" class="p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-black text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                    <svg id="icon-sun" class="w-5 h-5 md:w-6 md:h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="icon-moon" class="w-5 h-5 md:w-6 md:h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                
+                <!-- New Logout Button -->
+                <button id="btn-logout" class="hidden p-2.5 md:p-3 rounded-full bg-gray-100 dark:bg-black text-gray-600 dark:text-gray-300 hover:bg-brand-red hover:text-white transition-colors shadow-sm" title="Logout">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            </div>
         </div>
 
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -61,16 +68,14 @@
 
     <!-- Chat Container -->
     <main id="chat-box" class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 space-y-4 md:space-y-6 pb-28 md:pb-32 flex flex-col">
-        <div class="bg-white dark:bg-brand-gray border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 border-l-4 border-l-brand-red p-3 rounded-r-xl rounded-bl-xl self-start max-w-[85%] text-sm shadow-sm transition-colors duration-300">
-            Welcome to the grandstand. The feed is active. What did you miss?
-        </div>
+        <!-- Messages dynamically injected here -->
     </main>
 
     <!-- Input Area -->
     <footer class="absolute bottom-0 w-full p-4 md:p-6 bg-white dark:bg-brand-gray border-t border-gray-200 dark:border-gray-800 transition-colors duration-300 z-20">
         <form id="ask-form" class="flex gap-2 relative items-center max-w-4xl mx-auto">
             <input type="text" id="query-input" autocomplete="off" required class="flex-1 bg-gray-100 dark:bg-black border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-full pl-5 pr-14 py-3 text-sm focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red shadow-inner" placeholder="Ask about the match...">
-            <button type="submit" class="absolute right-1.5 bg-brand-red text-white rounded-full p-2 w-10 h-10 flex items-center justify-center shadow-md"><svg class="w-4 h-4 transform rotate-90 relative left-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg></button>
+            <button type="submit" class="absolute right-1.5 bg-brand-red text-white rounded-full p-2 w-10 h-10 flex items-center justify-center shadow-md hover:bg-brand-darkred transition-colors"><svg class="w-4 h-4 transform rotate-90 relative left-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg></button>
         </form>
     </footer>
 
@@ -82,9 +87,33 @@
                 <button id="close-modal" class="text-gray-500 hover:text-gray-900 dark:hover:text-white text-2xl font-bold">&times;</button>
             </div>
             <div class="overflow-y-auto flex-1 p-0 hide-scrollbar bg-gray-50 dark:bg-brand-gray" id="standings-list">
-                <!-- Data populated here -->
                 <p class="p-6 text-center text-sm text-gray-500">Waiting for telemetry...</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal Overlay -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden flex-col justify-center items-center p-4 transition-opacity">
+        <div class="bg-white dark:bg-brand-gray w-full max-w-sm rounded-2xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-black text-center mb-6 dark:text-white"><span class="text-brand-red">Sports</span>Sync</h2>
+            
+            <form id="auth-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+                    <input type="text" id="auth-username" required class="w-full bg-gray-100 dark:bg-black border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:border-brand-red">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                    <input type="password" id="auth-password" required class="w-full bg-gray-100 dark:bg-black border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:border-brand-red">
+                </div>
+                
+                <div id="auth-error" class="text-brand-red text-sm hidden text-center font-medium"></div>
+                
+                <div class="flex gap-2 pt-2">
+                    <button type="button" id="btn-login" class="flex-1 bg-brand-red text-white font-bold py-2 rounded-lg shadow-md hover:bg-brand-darkred transition">Login</button>
+                    <button type="button" id="btn-register" class="flex-1 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white font-bold py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition">Register</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -98,6 +127,127 @@
             document.documentElement.classList.toggle('dark');
         });
 
+        // --- JWT Authentication Logic ---
+        let jwtToken = localStorage.getItem('sportsSyncToken');
+        const authModal = document.getElementById('auth-modal');
+        const authError = document.getElementById('auth-error');
+        const usernameInput = document.getElementById('auth-username');
+        const passwordInput = document.getElementById('auth-password');
+        const btnLogout = document.getElementById('btn-logout');
+
+        function checkAuth() {
+            if (jwtToken) {
+                authModal.classList.add('hidden');
+                authModal.classList.remove('flex');
+                btnLogout.classList.remove('hidden');
+                loadChatHistory(currentSession);
+            } else {
+                authModal.classList.remove('hidden');
+                authModal.classList.add('flex');
+                btnLogout.classList.add('hidden');
+
+                chatBox.innerHTML = '';
+                latestStandings = [];
+                document.getElementById('ui-val-1').textContent = '--';
+                document.getElementById('ui-val-2').textContent = '--';
+
+                if (!document.getElementById('modal-overlay').classList.contains('hidden')) {
+                    renderStandings();
+                }
+            }
+        }
+
+        btnLogout.addEventListener('click', () => {
+            // 1. Destroy the JWT token
+            localStorage.removeItem('sportsSyncToken');
+            jwtToken = null;
+            
+            // 2. Clear credentials from the auth inputs
+            usernameInput.value = '';
+            passwordInput.value = '';
+            authError.classList.add('hidden');
+            
+            // 3. Trigger UI reset
+            checkAuth();
+        });
+
+        async function handleAuth(endpoint) {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            if (!username || !password) return;
+            
+            try {
+                const res = await fetch(`/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    if (endpoint === 'login') {
+                        jwtToken = data.access_token;
+                        localStorage.setItem('sportsSyncToken', jwtToken);
+                        checkAuth();
+                    } else {
+                        authError.textContent = "Registration successful. Please login.";
+                        authError.classList.remove('hidden', 'text-brand-red');
+                        authError.classList.add('text-green-500');
+                    }
+                } else {
+                    authError.textContent = data.detail || "Authentication failed";
+                    authError.classList.remove('hidden', 'text-green-500');
+                    authError.classList.add('text-brand-red');
+                }
+            } catch (err) {
+                authError.textContent = "Network error occurred.";
+                authError.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('auth-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleAuth('login');
+        });
+        document.getElementById('btn-login').addEventListener('click', () => handleAuth('login'));
+        document.getElementById('btn-register').addEventListener('click', () => handleAuth('register'));
+
+        // --- Load Secure Chat History ---
+        async function loadChatHistory(session) {
+            chatBox.innerHTML = '<div class="text-center text-sm text-gray-400 mt-4">Loading history...</div>';
+            
+            try {
+                // Fetch using JWT token. user_id is automatically extracted by FastAPI.
+                const res = await fetch(`/history/${session}`, {
+                    headers: { 'Authorization': `Bearer ${jwtToken}` }
+                });
+                
+                if (res.status === 401) {
+                    localStorage.removeItem('sportsSyncToken');
+                    jwtToken = null;
+                    checkAuth();
+                    return;
+                }
+                
+                const data = await res.json();
+                chatBox.innerHTML = '';
+                
+                if (data.messages && data.messages.length > 0) {
+                    data.messages.forEach(msg => appendMessage(msg.text, msg.is_user));
+                } else {
+                    const sportName = session === 'f1_live' ? 'F1' : session === 'football_pl_1' ? 'Football' : 'Cricket';
+                    appendMessage(`Welcome to the grandstand. The ${sportName} feed is active. What did you miss?`, false);
+                }
+            } catch (err) {
+                chatBox.innerHTML = '';
+                appendMessage("Failed to load chat history.", false);
+            }
+        }
+
+        // Initialize Auth Check
+        checkAuth();
+
         // --- Sport Switcher ---
         const sportBtns = document.querySelectorAll('.sport-btn');
         sportBtns.forEach(btn => {
@@ -110,17 +260,15 @@
                 e.target.classList.add('bg-brand-red', 'text-white', 'shadow-md');
                 currentSession = e.target.dataset.session;
                 
-                chatBox.innerHTML = '';
-                appendMessage(`Switched to ${e.target.innerText.replace(/[^\w\s]/g, '').trim()} feed.`, false);
+                if (jwtToken) loadChatHistory(currentSession);
                 
-                // Clear state UI until next poll
                 latestStandings = [];
                 document.getElementById('ui-val-1').textContent = '--';
                 document.getElementById('ui-val-2').textContent = '--';
             });
         });
 
-        // --- Modal Logic ---
+        // --- Standings Modal Logic ---
         const modal = document.getElementById('modal-overlay');
         const standingsList = document.getElementById('standings-list');
         
@@ -149,8 +297,6 @@
                             <span class="text-xs font-medium text-gray-500 dark:text-gray-400">${driver.team}</span>
                         </div>
                     </div>
-                    
-                    <!-- Points on the right-hand side -->
                     <div class="text-right ${driver.points > 0 ? 'opacity-100' : 'opacity-40'}">
                         <span class="font-black text-lg md:text-xl text-gray-900 dark:text-white">${driver.points}</span>
                         <span class="text-[10px] uppercase tracking-wider text-gray-500 block -mt-1 font-bold">PTS</span>
@@ -159,29 +305,26 @@
             `).join('');
         }
 
-        // --- Live Polling Mechanism (Every 4 seconds) ---
+        // --- Live Polling Mechanism (Public Data, no JWT required) ---
         async function fetchLiveState() {
             try {
                 const res = await fetch(`/state/${currentSession}`);
                 const data = await res.json();
                 
-                if (data.state) {
-                    if(currentSession === 'f1_live') {
-                        document.getElementById('ui-label-1').innerHTML = 'Flag: <span id="ui-val-1" class="font-bold text-gray-900 dark:text-white">' + (data.state.flags || 'Green') + '</span>';
-                        document.getElementById('ui-label-2').innerHTML = 'Leader: <span id="ui-val-2" class="font-bold text-gray-900 dark:text-white">' + (data.state.leader || '--') + '</span>';
-                        
-                        latestStandings = data.state.standings || [];
-                        // Update modal dynamically if it's open
-                        if (!modal.classList.contains('hidden')) renderStandings();
-                    }
+                if (data.state && currentSession === 'f1_live') {
+                    document.getElementById('ui-label-1').innerHTML = 'Flag: <span id="ui-val-1" class="font-bold text-gray-900 dark:text-white">' + (data.state.flags || 'Green') + '</span>';
+                    document.getElementById('ui-label-2').innerHTML = 'Leader: <span id="ui-val-2" class="font-bold text-gray-900 dark:text-white">' + (data.state.leader || '--') + '</span>';
+                    
+                    latestStandings = data.state.standings || [];
+                    if (!modal.classList.contains('hidden')) renderStandings();
                 }
             } catch (err) {}
         }
         
         setInterval(fetchLiveState, 4000);
-        fetchLiveState(); // Initial call
+        fetchLiveState();
 
-        // --- Chat Logic ---
+        // --- Chat Appending ---
         function appendMessage(text, isUser) {
             const div = document.createElement('div');
             if (isUser) {
@@ -194,8 +337,11 @@
             chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
         }
 
+        // --- Secure Form Submission ---
         document.getElementById('ask-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!jwtToken) return checkAuth(); // Failsafe
+            
             const input = document.getElementById('query-input');
             const question = input.value.trim();
             if (!question) return;
@@ -213,10 +359,22 @@
             try {
                 const response = await fetch('/ask', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
                     body: JSON.stringify({ question: question, session_id: currentSession })
                 });
+                
                 document.getElementById('typing-indicator')?.remove();
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('sportsSyncToken');
+                    jwtToken = null;
+                    checkAuth();
+                    return;
+                }
+
                 const data = await response.json();
                 appendMessage(data.answer, false);
             } catch (err) {

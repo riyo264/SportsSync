@@ -3,7 +3,11 @@ services:
     build: .
     container_name: sportssync_app
     ports:
-      - "80:80"
+      - "8000:80"
     env_file:
       - .env
-    restart: unless-stopped
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
