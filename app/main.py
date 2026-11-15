@@ -16,6 +16,8 @@ from app.state_manager import state_manager
 from app.ai_service import get_answer
 from app.db import save_message, get_chat_history, create_user, get_user, clear_user_chats
 from app.auth import get_password_hash, verify_password, create_access_token, SECRET_KEY, ALGORITHM
+# 1. Added get_match_context here
+from app.football_ingestion import get_cached_league, get_match_context
 
 security = HTTPBearer()
 
@@ -54,7 +56,6 @@ class AuthUser(BaseModel):
 class UserQuery(BaseModel):
     question: str
     session_id: str = "f1_live"
-
 
 
 @app.get("/")
@@ -101,17 +102,36 @@ async def fetch_history(session_id: str, current_user: str = Depends(get_current
 @app.post("/ask")
 @limiter.limit("5/minute")
 async def ask_assistant(request: Request, query: UserQuery, current_user: str = Depends(get_current_user)):
-    context = state_manager.get_context(query.session_id)
-    if not context["current_state"]:
-        return {"answer": f"No live data found for session: {query.session_id}"}
-    
+    # Save user's question immediately
     save_message(current_user, query.session_id, query.question, True)
-    answer = get_answer(query.question, context["current_state"], context["recent_logs"])
-    save_message(current_user, query.session_id, answer, False)
-    
-    return {"answer": answer, "state_snapshot": context["current_state"]}
+
+    if query.session_id.startswith("football_"):
+        fixture_id = query.session_id.split("_")[-1]
+        events_text = await get_match_context(fixture_id)
+        state_snapshot = {"Match Timeline": events_text}
+        answer = get_answer(query.question, state_snapshot, [])
+        save_message(current_user, query.session_id, answer, False)
+        return {"answer": answer, "state_snapshot": state_snapshot}
+        
+    else:
+        context = state_manager.get_context(query.session_id)
+        if not context["current_state"]:
+            answer = f"No live data found for session: {query.session_id}"
+            save_message(current_user, query.session_id, answer, False)
+            return {"answer": answer}
+        
+        answer = get_answer(query.question, context["current_state"], context["recent_logs"])
+        save_message(current_user, query.session_id, answer, False)
+        
+        return {"answer": answer, "state_snapshot": context["current_state"]}
 
 @app.get("/state/{session_id}")
 async def get_state(session_id: str):
     context = state_manager.get_context(session_id)
     return {"state": context.get("current_state", {})}
+
+@app.get("/api/football/{league_key}")
+async def api_get_football_league(league_key: str):
+    """Fetches matches for a specific league on-demand."""
+    matches = await get_cached_league(league_key)
+    return {"matches": matches}
