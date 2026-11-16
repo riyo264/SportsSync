@@ -2,7 +2,6 @@ import asyncio
 import httpx
 from app.state_manager import state_manager
 
-# OpenF1 Free Tier Base URL
 F1_BASE_URL = "https://api.openf1.org/v1"
 
 async def fetch_latest_f1_session_key(client: httpx.AsyncClient) -> str:

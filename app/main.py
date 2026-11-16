@@ -16,7 +16,6 @@ from app.state_manager import state_manager
 from app.ai_service import get_answer
 from app.db import save_message, get_chat_history, create_user, get_user, clear_user_chats
 from app.auth import get_password_hash, verify_password, create_access_token, SECRET_KEY, ALGORITHM
-# 1. Added get_match_context here
 from app.football_ingestion import get_cached_league, get_match_context
 
 security = HTTPBearer()

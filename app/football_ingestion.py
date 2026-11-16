@@ -15,12 +15,11 @@ LEAGUE_IDS = {
     "isl": 323
 }
 
-# --- IN-MEMORY TTL CACHE ---
+# IN-MEMORY TTL CACHE
 league_cache = {}
-CACHE_TTL = 300  # 5 minutes
+CACHE_TTL = 300
 
 def get_current_season() -> int:
-    """European & ISL seasons start around Aug/Sep, so Nov 2026 belongs to the 2026 season."""
     now = datetime.utcnow()
     return now.year if now.month >= 7 else now.year - 1
 
@@ -33,7 +32,7 @@ async def fetch_league_matches(league_key: str, league_id: int):
     base_url = "https://v3.football.api-sports.io/fixtures"
 
     async with httpx.AsyncClient(timeout=10.0) as client:
-        # 1. Check for LIVE matches first
+        # Check for LIVE matches first
         live_res = await client.get(
             base_url,
             headers=HEADERS,
@@ -46,7 +45,7 @@ async def fetch_league_matches(league_key: str, league_id: int):
 
         matches = live_data.get("response", [])
 
-        # 2. STRICT FALLBACK: Only fetch completed fixtures if there are ZERO live matches
+        # STRICT FALLBACK: Only fetch completed fixtures if there are ZERO live matches
         if not matches:
             for season in [2026, 2025, 2024, 2023]:
                 recent_res = await client.get(

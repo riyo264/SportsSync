@@ -141,13 +141,13 @@
 
     <!-- ONE SINGLE SCRIPT TAG TO RULE THEM ALL -->
     <script>
-        // --- GLOBAL STATE ---
+        // GLOBAL STATE
         let activeSport = 'f1';
         let activeLeague = 'laliga';
         let currentSession = 'f1_live';
         let latestStandings = [];
         
-        // --- DOM ELEMENTS ---
+        // DOM ELEMENTS
         const chatBox = document.getElementById('chat-box');
         const chatFooter = document.getElementById('chat-footer');
         const footballLobby = document.getElementById('football-lobby');
@@ -334,14 +334,13 @@
             btnBackMatches.classList.remove('hidden');
             telemetryBar.classList.remove('hidden');
             
-            // Cleaned string interpolation - no SyntaxError!
             document.getElementById('ui-label-1').innerHTML = `${match.home} vs ${match.away}: <span class="font-bold text-gray-900 dark:text-white">${match.homeScore} - ${match.awayScore}</span>`;
             document.getElementById('ui-label-2').innerHTML = `Status: <span class="font-bold ${match.isLive ? 'text-brand-red' : 'text-gray-900 dark:text-white'}">${match.statusText}</span>`;
             
             if (jwtToken) loadChatHistory(currentSession, `${match.home} vs ${match.away}`);
         }
 
-        // --- FOOTBALL DATA INGESTION ---
+        // FOOTBALL DATA INGESTION
         async function renderLeagueMatches(leagueKey) {
             matchCardsGrid.innerHTML = '<div class="col-span-full text-center text-sm text-gray-500 py-8">Fetching fixtures...</div>';
             
@@ -404,7 +403,6 @@
             }
         }
 
-        // --- UI HELPERS ---
         function setSportTabActive(sport) {
             document.querySelectorAll('.sport-btn').forEach(b => {
                 const isTarget = b.dataset.sport === sport;
@@ -437,7 +435,7 @@
             });
         }
 
-        // --- DOM EVENT LISTENERS ---
+        // DOM EVENT LISTENERS
         btnBackMatches.addEventListener('click', () => history.back());
         
         document.querySelectorAll('.sport-btn').forEach(btn => {
@@ -452,7 +450,7 @@
             });
         });
 
-        // --- RAG CHAT LOGIC ---
+        // RAG CHAT LOGIC
         async function loadChatHistory(session, matchTitle = null) {
             chatBox.innerHTML = '<div class="text-center text-sm text-gray-400 mt-4">Loading history...</div>';
             
@@ -547,7 +545,7 @@
             }
         });
 
-        // --- F1 MODAL & POLLING ---
+        // F1 MODAL & POLLING
         const modal = document.getElementById('modal-overlay');
         const standingsList = document.getElementById('standings-list');
         
@@ -602,7 +600,7 @@
         
         setInterval(fetchLiveState, 4000); // 4-second polling loop
 
-        // --- APP INITIALIZATION ---
+        // APP INITIALIZATION
         if (!window.location.hash) {
             window.location.hash = '#f1';
         } else {
